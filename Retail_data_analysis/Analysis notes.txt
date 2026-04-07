@@ -1,0 +1,19 @@
+There are total 2000 entries in the dataset.
+There are total 155 distinct customers.
+3 distinct products are sold.
+There are 13 rows out of 2000 having some values as null that means less than 1% data is null.
+Dropping the null.
+
+On '2022-11-05' sales
+Number of order - 11
+Total sales - 6830 RS
+
+Total sales in November month - Rs. 68915 With an average sale of Rs.472
+
+Category	net_sale Order_count	
+"Electronics"	311445	678
+"Clothing"	309995	698
+"Beauty"	286790	611
+
+Electronics category shows maximum net sale amount whereas Clothing category shows highest order count among all three.
+
