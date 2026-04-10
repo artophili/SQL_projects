@@ -55,3 +55,78 @@ SELECT AVG(total_sale) FROM retail_sales WHERE TO_CHAR(sale_date, 'YYYY-MM') = '
 --calculate the total sales (total_sale) for each category
 SELECT category, SUM(total_sale) AS net_sale, COUNT(transactions_id) AS order_count FROM retail_sales GROUP BY category;
 
+-- Q.4 Write a SQL query to find the average age of customers who purchased items from the 'Beauty' category.
+SELECT AVG(age) FROM retail_sales WHERE category = 'Beauty';
+
+-- Q.5 Write a SQL query to find all transactions where the total_sale is greater than 1000.
+SELECT * FROM retail_sales WHERE total_sale > 1000;
+
+-- Q.6 Write a SQL query to find the total number of transactions (transaction_id) made by each gender in each category.
+SELECT COUNT(transactions_id), gender, category FROM retail_sales GROUP BY gender, category;
+
+-- Q.7 Write a SQL query to calculate the average sale for each month. Find out best selling month in each year
+SELECT year, month, avg_sale FROM (
+SELECT 
+	EXTRACT(YEAR FROM sale_date) as year,
+	EXTRACT(MONTH FROM sale_date) as month,
+	AVG(total_sale) as avg_sale,
+	RANK() OVER(PARTITION BY EXTRACT(YEAR FROM sale_date) ORDER BY AVG(total_sale) DESC) AS rank
+FROM retail_sales
+GROUP BY 1, 2
+) as t1
+WHERE rank = 1
+-- GROUP BY 1, 2 -> Group by with the 1st and 2nd column in select statement.
+
+
+CREATE TABLE users(
+	user_id INT PRIMARY KEY,
+	username VARCHAR(15)
+);
+
+CREATE TABLE orders(
+	order_id INT PRIMARY KEY,
+	user_id INT
+);
+
+SELECT * FROM users;
+SELECT * FROM orders;
+
+SELECT u.username FROM users u LEFT JOIN orders o ON u.user_id = o.user_id WHERE order_id IS NULL;
+
+SELECT * FROM retail_sales;
+
+-- Q.8 Write a SQL query to find the top 5 customers based on the highest total sales 
+SELECT customer_id, SUM(total_sale) AS total_sales FROM retail_sales GROUP BY 1 ORDER BY 2 DESC LIMIT 5; 
+
+-- Q.9 Write a SQL query to find the number of unique customers who purchased items from each category.
+SELECT category, COUNT(DISTINCT customer_id)FROM retail_sales GROUP BY 1;
+
+-- Q.10 Write a SQL query to create each shift and number of orders (Example Morning <12, Afternoon Between 12 & 17, Evening >17)
+WITH hourly_sales
+AS
+(
+SELECT *,
+	CASE 
+		WHEN EXTRACT(HOUR FROM sale_time) < 12 THEN 'Morning'
+		WHEN EXTRACT(HOUR FROM sale_time) BETWEEN 12 AND 17 THEN 'Afternoon'
+		ELSE 'Evening'
+	END as shift
+FROM retail_sales
+)
+SELECT shift, COUNT(*) as total_orders FROM hourly_sales GROUP BY shift;
+
+SELECT * FROM retail_sales;
+
+--Quarter wise order and revenue
+WITH Quartely_sales 
+AS (SELECT *,
+	CASE
+		WHEN EXTRACT(MONTH FROM sale_date) <= 03 THEN 'Q1'
+		WHEN EXTRACT(MONTH FROM sale_date) <= 06 THEN 'Q2'
+		WHEN EXTRACT(MONTH FROM sale_date) <= 09 THEN 'Q3'
+		ELSE 'Q4'
+	END as quarters
+FROM retail_sales
+)
+
+SELECT quarters, COUNT(*) as total_orders, SUM(total_sale) as total_revenue FROM Quartely_sales GROUP BY quarters ORDER BY quarters;
