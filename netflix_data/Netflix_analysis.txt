@@ -1,0 +1,4 @@
+There are total 6131 movies and 2676 TV shows.
+The most common rating is TV-MA with 3207 titles for both movies and TV shows.
+
+

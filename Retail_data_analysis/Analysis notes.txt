@@ -1,0 +1,51 @@
+Four layer of solving SQL
+Layer 1 (The Foundation): Get the raw data. ("I need the sales table.")
+Layer 2 (The Transformation): Clean or group it. ("I need to turn dates into months and years.")
+Layer 3 (The Math): Perform the calculation. ("I need the average sales.")
+Layer 4 (The Filter): Apply the final constraint. ("I only want the top one per year.")
+
+
+There are total 2000 entries in the dataset.
+There are total 155 distinct customers.
+3 distinct products are sold.
+There are 13 rows out of 2000 having some values as null that means less than 1% data is null.
+Dropping the null.
+
+On '2022-11-05' sales
+Number of order - 11
+Total sales - 6830 RS
+
+Total sales in November month - Rs. 68915 With an average sale of Rs.472
+
+Category	net_sale Order_count	
+"Electronics"	311445	678
+"Clothing"	309995	698
+"Beauty"	286790	611
+
+Electronics category shows maximum net sale amount whereas Clothing category shows highest order count among all three.
+
+Average age of customer who purchased beauty product - 40
+
+Maximum transactions are made by femalesin beauty category.
+Whereas Electronics category showed maximum transaction by Male.
+
+In 2022, July month showed the highest average sale of Rs.541.3February month showed highest average sale of Rs. 535.5.
+Overall the average sale showed decrease.
+
+Category wise distinct customer count
+"Beauty"	- 141
+"Clothing"	- 149
+"Electronics"	- 144
+
+Clothing shows highest number of sales.
+
+Hourly sale in a day shows that the maximum sale was happened in evening time.
+"Afternoon"	377
+"Evening"	1062
+"Morning"	548
+
+4th Quarter showed the highest number of orders and the revenue among all the 4 quarters.
+"Q1"	305	131690
+"Q2"	314	147205
+"Q3"	509	236645
+"Q4"	859	392690
