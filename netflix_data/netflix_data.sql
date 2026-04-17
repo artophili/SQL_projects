@@ -47,4 +47,24 @@ WHERE rank = 1;
 -- 3. List all movies released in a specific year
 SELECT * FROM netflix WHERE release_year = 2020;
 
+-- 4. Find the top 5 countries with the most content on Netflix
+SELECT *
+FROM
+(
+SELECT 
+	UNNEST(STRING_TO_ARRAY(country,',')) AS country, 
+	COUNT(*) AS total_content
+FROM netflix
+GROUP BY 1
+) AS t1
+WHERE country IS NOT NULL
+ORDER BY total_content DESC
+LIMIT 5;
+
+--Longest movie
+SELECT * FROM netflix WHERE type = 'Movie' AND duration IS NOT NULL ORDER BY SPLIT_PART(duration, ' ',1)::INT DESC;
+
+--SPLIT_PART(duration, ' ',1)::INT DESC - Split the duration string using space and picks the first part as a 
+--and ::INT cast that part into actual interger and then order by descending.
+
 
