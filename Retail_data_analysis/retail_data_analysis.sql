@@ -18,6 +18,7 @@ CREATE TABLE retail_sales(
 
 SELECT * FROM retail_sales;
 
+SELECT COUNT(transactions_id) FROM retail_sales;
 --Data exploration and cleaning
 SELECT COUNT(*) FROM retail_sales;;;
 
@@ -26,6 +27,7 @@ SELECT COUNT(DISTINCT customer_id) FROM retail_sales;
 
 --Distinct product categories
 SELECT COUNT(DISTINCT category) FROM retail_sales;
+SELECT DISTINCT category FROM retail_sales;
 
 --Checking for null values
 SELECT * FROM retail_sales
@@ -75,6 +77,7 @@ FROM retail_sales
 GROUP BY 1, 2
 ) as t1
 WHERE rank = 1
+
 -- GROUP BY 1, 2 -> Group by with the 1st and 2nd column in select statement.
 
 

@@ -67,4 +67,24 @@ SELECT * FROM netflix WHERE type = 'Movie' AND duration IS NOT NULL ORDER BY SPL
 --SPLIT_PART(duration, ' ',1)::INT DESC - Split the duration string using space and picks the first part as a 
 --and ::INT cast that part into actual interger and then order by descending.
 
+-- 7. Find all the movies/TV shows by director 'Rajiv Chilaka'!
+SELECT * FROM netflix WHERE director = 'Rajiv Chilaka';
+
+SELECT * FROM (SELECT *,UNNEST(STRING_TO_ARRAY(director,',')) AS director_name FROM netflix) WHERE director_name = 'Rajiv Chilaka';
+
+SELECT * FROM netflix WHERE type = 'TV Show' AND SPLIT_PART(duration, ' ',1)::INT > 5;
+
+SELECT *
+FROM netflix
+WHERE 
+	TYPE = 'TV Show'
+	AND
+	SPLIT_PART(duration, ' ', 1)::INT > 5;
+
+
+
+
+
+
+
 
